@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Cart.module.css";
 import { useState, useEffect } from "react";
 
-
+import { Toaster, toast } from "react-hot-toast";
 const Cart = () => {
   const [cart, setCart] = useState([]);
   const [wishList, setWishList] = useState([]);
@@ -17,12 +17,12 @@ const Cart = () => {
   const AddToWish = (item) => {
     let existingItem = wishList.find((product) => product._id === item._id);
     if (existingItem) {
-      alert("Item already in wish list");
+      toast.error("Item already in wish list");
     } else {
       const updatedWish = [...wishList, item];
       setWishList(updatedWish);
       localStorage.setItem("wish", JSON.stringify(updatedWish));
-      alert("Item added to wish list");
+       toast.success("item added to wish list");
     }
   };
 
@@ -30,7 +30,8 @@ const Cart = () => {
     const updatedCart = cart.filter((product) => product._id !== item._id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-    alert("Item removed from cart");
+  
+     toast.success("Item removed from cart");
   };
 
   const IncreaseQuantity = (item) => {
@@ -59,7 +60,10 @@ const Cart = () => {
   );
   return (
     <div className={styles.container}>
-<h1 className={styles.sum}>Total: ${totalsum}</h1>
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
+      </div>
+      <h1 className={styles.sum}>Total: ${totalsum}</h1>
       {cart.length > 0 ? (
         cart.map((item) => (
           <div className={styles.card} key={item._id}>
@@ -69,13 +73,22 @@ const Cart = () => {
             <p>Quantity: {item.quantity}</p>
             <p>Total: ${item.price * item.quantity}</p>
             <div className={styles.buttons}>
-              <button onClick={() => RemoveFromCart(item)} className={styles.cart}>
+              <button
+                onClick={() => RemoveFromCart(item)}
+                className={styles.cart}
+              >
                 <i className="fa-solid fa-trash"></i>
               </button>
-              <button onClick={() => IncreaseQuantity(item)} className={styles.plus}>
+              <button
+                onClick={() => IncreaseQuantity(item)}
+                className={styles.plus}
+              >
                 <i className="fa-solid fa-plus"></i>
               </button>
-              <button onClick={() => DecreaseQuantity(item)} className={styles.minus}>
+              <button
+                onClick={() => DecreaseQuantity(item)}
+                className={styles.minus}
+              >
                 <i className="fa-solid fa-minus"></i>
               </button>
               <button onClick={() => AddToWish(item)} className={styles.wish}>
