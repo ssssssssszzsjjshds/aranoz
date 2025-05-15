@@ -3,6 +3,7 @@ import styles from "./Wish.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { GetProductsThunk } from "../../redux/reducers/ProductSlice";
+import { Toaster, toast } from "react-hot-toast";
 
 const Wish = () => {
   const [wishList, setWishList] = useState([]);
@@ -19,10 +20,12 @@ const Wish = () => {
       existingItem.quantity += 1;
     } else {
       cart.push({ ...item, quantity: 1 });
+      
     }
     setWishList(wishList.filter((product) => product._id !== item._id));
     localStorage.setItem("cart", JSON.stringify(cart));
     RemoveFromWish(item);
+     toast.success("Item added to cart");
   };
 
   const RemoveFromWish = (item) => {
@@ -32,6 +35,9 @@ const Wish = () => {
   };
   return (
     <div className={styles.container}>
+        <div>
+        <Toaster position="top-center" reverseOrder={false} />
+      </div>
       {wishList.length > 0 ? (
         wishList.map((item) => (
           <div className={styles.card} key={item._id}>

@@ -3,6 +3,8 @@ import styles from "./SecTwo.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
+
 import { GetProductsThunk } from "../../../../redux/reducers/ProductSlice";
 
 const SecTwo = () => {
@@ -19,11 +21,14 @@ const SecTwo = () => {
     let wish = JSON.parse(localStorage.getItem("wish")) || [];
     let existingItem = wish.find((product) => product._id === item._id);
     if (existingItem) {
-      alert("Item already in wish list");
+      
+      toast.error("Item already in wish list");
     } else {
       wish.push(item);
       localStorage.setItem("wish", JSON.stringify(wish));
+      toast.success("Item added to wishlist");
     }
+    
   }
   function AddToCart(item) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -34,6 +39,7 @@ const SecTwo = () => {
       cart.push({ ...item, quantity: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("Item added to cart");
   }
 
   const [sort, setSort] = useState("default");
@@ -53,8 +59,12 @@ const SecTwo = () => {
         }
         return 0;
       });
+
   return (
     <div className={styles.container}>
+      <div>
+        <Toaster position="top-center" reverseOrder={false} />
+      </div>
       <div className={styles.top}>
         <div className={styles.left}>
           <h1>Awesome</h1>
