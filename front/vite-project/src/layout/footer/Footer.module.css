@@ -1,0 +1,11 @@
+.container {
+    padding: 50px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    i {
+        color: red;
+    }
+}

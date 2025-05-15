@@ -1,0 +1,141 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 80%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 0px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 20px 0px;
+
+
+    overflow: hidden;
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .cart {
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .wish {
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+        }
+    }
+
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        color: red;
+        font-size: 20px;
+    }
+
+
+    h3 {
+        translate: 5px 0px !important;
+        transition: all 0.4s ease-in-out;
+    }
+
+    p {
+        translate: 5px 0px !important;
+        transition: all 0.4s ease-in-out;
+    }
+}
+
+.card:hover {
+    box-shadow: 0px 10px 20px 0px rgba(0, 23, 51, 0.09);
+
+    .cart {
+        translate: 15px 0px !important;
+        transition: all 0.4s ease-in-out;
+        opacity: 1;
+    }
+
+    .wish {
+        translate: -15px 0px !important;
+        transition: all 0.4s ease-in-out;
+        opacity: 1;
+    }
+
+    h3 {
+        translate: 20px 0px !important;
+        transition: all 0.4s ease-in-out;
+    }
+
+    p {
+        translate: 20px 0px !important;
+        transition: all 0.4s ease-in-out;
+    }
+}
+
+
+.sortFilter {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    input {
+        padding: 10px 20px;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1120px) {
+   
+    .sortFilter {
+        flex-direction: column;
+        width: 100%;
+
+        button {
+            width: 200px;
+        }
+    }
+    .top {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
